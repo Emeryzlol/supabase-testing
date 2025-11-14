@@ -56,10 +56,7 @@ export default function AuthGate({ onAuth }: { onAuth: (session: Session | null)
   };
 
   if (!session) {
-    const base = (import.meta as any)?.env?.BASE_URL || "/supabase-testing/";
-    const normalizedBase = base.endsWith("/") ? base : base + "/";
-    const redirectTo = `${window.location.origin}${normalizedBase}`;
-
+    const redirectTo = `${window.location.origin}/supabase-testing/`;
     return (
       <Auth
         supabaseClient={supabase}
