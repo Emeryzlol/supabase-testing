@@ -56,12 +56,16 @@ export default function AuthGate({ onAuth }: { onAuth: (session: Session | null)
   };
 
   if (!session) {
+    const base = (import.meta as any)?.env?.BASE_URL || "/supabase-testing/";
+    const normalizedBase = base.endsWith("/") ? base : base + "/";
+    const redirectTo = `${window.location.origin}${normalizedBase}`;
+
     return (
       <Auth
         supabaseClient={supabase}
         appearance={{ theme: ThemeSupa }}
         providers={["google"]}
-        redirectTo="https://emeryzlol.github.io/supabase-testing/#auth"
+        redirectTo={redirectTo}
       />
     );
   }
