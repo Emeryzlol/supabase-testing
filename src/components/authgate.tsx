@@ -61,7 +61,7 @@ export default function AuthGate({ onAuth }: { onAuth: (session: Session | null)
         supabaseClient={supabase}
         appearance={{ theme: ThemeSupa }}
         providers={["google"]}
-        redirectTo="https://emeryzlol.github.io/supabase-testing/"
+        redirectTo="https://emeryzlol.github.io/supabase-testing/#auth"
       />
     );
   }
