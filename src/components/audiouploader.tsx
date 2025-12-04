@@ -3,9 +3,10 @@ import { supabase } from '../supabaseClient'
 
 type Props = {
   userId: string
+  onUploaded?: () => void
 }
 
-export default function AudioUploader({ userId }: Props) {
+export default function AudioUploader({ userId, onUploaded }: Props) {
   const [recording, setRecording] = useState(false)
   const [blob, setBlob] = useState<Blob | null>(null)
   const [url, setUrl] = useState<string | null>(null)
@@ -83,6 +84,8 @@ export default function AudioUploader({ userId }: Props) {
     setUrl(publicUrl)
     setUploadPhase('success')
     setUploadMessage('Uploaded successfully!')
+    // notify parent so Transcriber can re-fetch immediately
+    onUploaded?.()
   }
 
   return (

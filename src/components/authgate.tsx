@@ -15,9 +15,11 @@ export default function AuthGate({ onAuth }: { onAuth: (session: Session | null)
 
     (async () => {
       const { data } = await supabase.auth.getSession();
+      console.log("AuthGate initial session:", data?.session);
       hadInitialSessionRef.current = !!data.session;
       setSession(data.session);
       onAuth(data.session);
+      console.log("AuthGate called onAuth with", !!data.session);
 
       // Subscribe only after initial session known.
       const res = supabase.auth.onAuthStateChange(async (event, sess) => {
